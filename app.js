@@ -19,6 +19,8 @@
     musicSubtitle: document.getElementById("music-subtitle"),
     musicMessage: document.getElementById("music-message"),
     audio: document.getElementById("site-audio"),
+    visitorCount: document.getElementById("visitor-count"),
+    visitorStatus: document.getElementById("visitor-status"),
     viewer: document.getElementById("image-viewer"),
     viewerImage: document.getElementById("viewer-image"),
     viewerName: document.getElementById("viewer-name"),
@@ -601,6 +603,57 @@
     window.setTimeout(revealPage, 3400);
   }
 
+  function setupVisitorCounter() {
+    const count = elements.visitorCount;
+    const status = elements.visitorStatus;
+    if (!count || !status) return;
+
+    const isLocalPreview = location.protocol === "file:" || ["localhost", "127.0.0.1"].includes(location.hostname);
+    if (isLocalPreview) {
+      status.textContent = "本地预览 · 不计入客流";
+      return;
+    }
+
+    const counterKey = "cugb_freshman_guide_2026_public_visits_741";
+    const storageKey = "cugb-visitor-counted-at-v1";
+    const now = Date.now();
+    const repeatWindow = 30 * 60 * 1000;
+    let lastCountedAt = 0;
+
+    try {
+      lastCountedAt = Number(window.localStorage.getItem(storageKey) || 0);
+    } catch (error) {
+      lastCountedAt = 0;
+    }
+
+    const shouldIncrement = !lastCountedAt || now - lastCountedAt > repeatWindow;
+    const action = shouldIncrement ? "hit" : "get";
+    const endpoint = `https://countapi.mileshilliard.com/api/v1/${action}/${counterKey}`;
+
+    window.fetch(endpoint, { cache: "no-store", headers: { Accept: "application/json" } })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Counter request failed: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        const value = Number(data.value);
+        if (!Number.isFinite(value)) throw new Error("Counter response is invalid");
+        count.textContent = new Intl.NumberFormat("zh-CN").format(value);
+        status.textContent = shouldIncrement ? "本次访问已计入" : "30 分钟内不重复计数";
+        if (shouldIncrement) {
+          try {
+            window.localStorage.setItem(storageKey, String(now));
+          } catch (error) {
+            // 无痕模式下仍显示服务端计数，不影响页面浏览。
+          }
+        }
+      })
+      .catch(() => {
+        count.textContent = "—";
+        status.textContent = "统计暂不可用";
+      });
+  }
+
   window.addEventListener("hashchange", () => {
     closeImageViewer();
     currentPath = parseHash();
@@ -652,5 +705,6 @@
   setupSonarScroll();
   setupMusicPlayer();
   setupImageViewer();
+  setupVisitorCounter();
   setupIntroSequence();
 })();
