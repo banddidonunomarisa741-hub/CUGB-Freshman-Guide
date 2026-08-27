@@ -502,6 +502,22 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .presentation-row::before { background: linear-gradient(118deg, transparent 0 22%, rgba(53,99,183,.2) 22.5% 23.5%, transparent 24% 38%, rgba(105,155,226,.18) 38.5% 39.5%, transparent 40%), linear-gradient(38deg, transparent 0 50%, rgba(42,91,176,.18) 50.5% 51.5%, transparent 52%); clip-path: polygon(5% 84%,18% 29%,34% 59%,49% 5%,63% 56%,80% 18%,96% 84%,77% 70%,62% 93%,47% 69%,31% 91%,18% 69%); }
 .text-row { border-color: rgba(88,139,185,.2); background: radial-gradient(circle at 88% 50%, rgba(126,180,224,.14), transparent 19%), linear-gradient(135deg, #fff 0%, #f6fbff 62%, #edf7ff 100%); }
 .text-row::before { background: repeating-linear-gradient(180deg, rgba(35,112,183,.16) 0 1px, transparent 1px 10px); clip-path: polygon(4% 7%,96% 0,87% 92%,11% 100%); }
+.priority-guide-row { min-height: 112px; margin-bottom: 17px; padding: 14px 18px; border-color: rgba(0,82,204,.34); background: radial-gradient(circle at 87% 42%,rgba(124,192,244,.28),transparent 25%), linear-gradient(120deg,#fafdff 0%,#e5f3ff 58%,#d2eaff 100%); box-shadow: 0 15px 32px rgba(0,70,158,.14), inset 0 0 24px rgba(255,255,255,.72); }
+.priority-guide-row::before { content: ""; position: absolute; z-index: 0; top: 50%; right: 30px; width: 170px; height: 170px; opacity: .28; background: repeating-conic-gradient(from 10deg at 50% 50%, rgba(0,82,204,.25) 0 1.5deg, transparent 2deg 29deg); clip-path: polygon(50% 0,58% 37%,81% 9%,65% 43%,100% 50%,65% 57%,81% 91%,58% 63%,50% 100%,42% 63%,19% 91%,35% 57%,0 50%,35% 43%,19% 9%,42% 37%); transform: translateY(-50%) rotate(0deg); animation: guide-flower-turn 18s linear infinite; pointer-events: none; }
+.priority-guide-row::after { content: ""; position: absolute; z-index: 0; inset: 0; border-top: 1px solid rgba(255,255,255,.96); border-left: 5px solid #0052cc; background: linear-gradient(108deg,rgba(255,255,255,.7),transparent 30% 78%,rgba(84,158,224,.12)); pointer-events: none; }
+.priority-guide-row > * { position: relative; z-index: 2; }
+.priority-guide-row .file-icon { width: 55px; height: 55px; flex-basis: 55px; border-radius: 15px 15px 15px 4px; box-shadow: 0 10px 22px rgba(0,76,166,.2); }
+.priority-guide-row .file-name { color: #073a78; font-size: 17px; font-weight: 800; }
+.priority-guide-row .file-type { color: #0052cc; font-weight: 800; }
+.guide-hint { display: flex; align-items: center; gap: 9px; margin-top: 7px; }
+.guide-hint b { flex: 0 0 auto; padding: 4px 7px; color: white; background: #0052cc; border-radius: 7px 7px 7px 2px; font: 800 7px/1 Consolas, monospace; letter-spacing: .1em; }
+.guide-hint em { overflow: hidden; color: #527291; font-size: 10px; line-height: 1.45; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
+.guide-ice-stream { position: absolute !important; z-index: 1 !important; top: 50%; right: 112px; width: 300px; height: 58px; transform: translateY(-50%); overflow: hidden; opacity: .72; pointer-events: none; -webkit-mask-image: linear-gradient(90deg,transparent,black 16% 85%,transparent); mask-image: linear-gradient(90deg,transparent,black 16% 85%,transparent); }
+.guide-ice-stream::before { content: ""; position: absolute; left: 10px; right: 5px; top: 50%; height: 1px; background: linear-gradient(90deg,transparent,rgba(0,82,204,.23),rgba(255,255,255,.72),transparent); }
+.guide-ice-stream i { position: absolute; right: 0; top: calc(50% - 8px); width: 16px; height: 16px; display: block; background: linear-gradient(135deg,#fff,#6caeea 60%,#0052cc); clip-path: polygon(50% 0,60% 35%,86% 14%,65% 40%,100% 50%,65% 60%,86% 86%,60% 65%,50% 100%,40% 65%,14% 86%,35% 60%,0 50%,35% 40%,14% 14%,40% 35%); filter: drop-shadow(0 0 5px rgba(0,82,204,.3)); animation: guide-ice-flow 7.2s linear infinite; }
+.guide-ice-stream i:nth-child(2) { width: 11px; height: 11px; top: 8px; animation-delay: -1.8s; animation-duration: 8.4s; }
+.guide-ice-stream i:nth-child(3) { width: 20px; height: 20px; top: 33px; animation-delay: -3.9s; animation-duration: 9.1s; }
+.guide-ice-stream i:nth-child(4) { width: 8px; height: 8px; top: 24px; animation-delay: -5.4s; animation-duration: 6.8s; }
 .document-row:hover::before { opacity: .42; transform: translateY(-50%) rotate(5deg) scale(1.06); }
 .image-row { min-height: 92px; background: radial-gradient(circle at 88% 50%, rgba(100,174,234,.13), transparent 20%), linear-gradient(135deg,#fff,#f2f9ff); border-color: rgba(52,133,203,.2); }
 .image-row::before { content: ""; position: absolute; z-index: 0; inset: 0; background: linear-gradient(112deg,rgba(255,255,255,.55),transparent 26% 82%,rgba(160,207,244,.14)); pointer-events: none; }
@@ -665,6 +681,8 @@ body.viewer-open { overflow: hidden; }
 @keyframes click-ripple { to { opacity: 0; transform: translate(-50%,-50%) scale(4.8); } }
 @keyframes click-shard { 0% { opacity: 1; transform: translate(-50%,-50%) rotate(var(--burst-angle)) scale(.35); } 100% { opacity: 0; transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) rotate(calc(var(--burst-angle) + 110deg)) scale(1); } }
 @keyframes frost-glint { to { transform: rotate(360deg); } }
+@keyframes guide-flower-turn { to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes guide-ice-flow { 0% { opacity: 0; transform: translateX(42px) rotate(0deg) scale(.45); } 18% { opacity: .88; } 78% { opacity: .72; } 100% { opacity: 0; transform: translateX(-270px) rotate(-280deg) scale(1.08); } }
 
 @media (max-width: 1100px) {
   .side-rail { opacity: .42; }
@@ -750,6 +768,13 @@ body.viewer-open { overflow: hidden; }
   .column-labels { display: none; }
   .file-list { padding-top: 14px; }
   .file-row { grid-template-columns: minmax(0, 1fr) 32px; min-height: 66px; padding: 8px 10px; }
+  .priority-guide-row { min-height: 112px; padding: 12px; }
+  .priority-guide-row .file-icon { width: 44px; height: 44px; flex-basis: 44px; }
+  .priority-guide-row .file-name { font-size: 14px; }
+  .guide-hint { display: block; margin-top: 6px; }
+  .guide-hint b { display: inline-block; }
+  .guide-hint em { display: block; margin-top: 5px; max-width: 215px; white-space: normal; }
+  .guide-ice-stream { right: 28px; width: 150px; opacity: .42; }
   .image-row { min-height: 78px; }
   .file-preview { width: 82px; height: 56px; flex-basis: 82px; border-width: 3px; }
   .image-row .file-identity { gap: 9px; }

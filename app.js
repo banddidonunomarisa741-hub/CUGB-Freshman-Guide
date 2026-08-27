@@ -61,6 +61,10 @@
     return ["jpg", "jpeg", "png", "webp", "gif", "svg", "avif"].includes(getExtension(name));
   }
 
+  function isPrimaryGuideName(name) {
+    return name === "CUGB大一新生生存指南_.docx";
+  }
+
   function typeLabel(node) {
     if (node.kind === "folder") return "文件夹";
     const extension = getExtension(node.name);
@@ -206,8 +210,10 @@
   function createRow(node, parentPath, contextPath, index) {
     const path = parentPath.concat(node.name);
     const row = node.kind === "folder" ? document.createElement("button") : document.createElement("a");
+    const primaryGuide = node.kind === "file" && isPrimaryGuideName(node.name) && parentPath.length === 0;
     row.className = "file-row";
     if (node.kind === "folder") row.classList.add("folder-row");
+    if (primaryGuide) row.classList.add("priority-guide-row");
     const rowExtension = node.kind === "folder" ? "" : getExtension(node.name);
     if (rowExtension === "doc" || rowExtension === "docx") row.classList.add("document-row", "word-row");
     if (rowExtension === "pdf") row.classList.add("document-row", "pdf-row");
@@ -261,6 +267,13 @@
     name.title = node.name;
     nameWrap.appendChild(name);
 
+    if (primaryGuide) {
+      const guidance = document.createElement("span");
+      guidance.className = "guide-hint";
+      guidance.innerHTML = '<b>START HERE / 建议先读</b><em>第一次来到这里，请先从总指南开始，再按目录继续浏览。</em>';
+      nameWrap.appendChild(guidance);
+    }
+
     if (contextPath) {
       const location = document.createElement("span");
       location.className = "file-path";
@@ -274,7 +287,7 @@
     const type = document.createElement("span");
     type.className = "file-type";
     const typeText = document.createElement("span");
-    typeText.textContent = typeLabel(node);
+    typeText.textContent = primaryGuide ? "先读这里" : typeLabel(node);
     const arrow = document.createElement("span");
     arrow.className = "row-arrow";
     arrow.setAttribute("aria-hidden", "true");
@@ -282,6 +295,13 @@
     type.append(typeText, arrow);
 
     row.append(identity, type);
+    if (primaryGuide) {
+      const iceStream = document.createElement("span");
+      iceStream.className = "guide-ice-stream";
+      iceStream.setAttribute("aria-hidden", "true");
+      iceStream.innerHTML = "<i></i><i></i><i></i><i></i>";
+      row.appendChild(iceStream);
+    }
     return row;
   }
 
@@ -303,7 +323,10 @@
     markActiveTreeItem();
     elements.list.replaceChildren();
 
-    const children = node.children || [];
+    const children = (node.children || []).slice();
+    if (!currentPath.length) {
+      children.sort((left, right) => Number(isPrimaryGuideName(right.name)) - Number(isPrimaryGuideName(left.name)));
+    }
     const folderCount = children.filter((child) => child.kind === "folder").length;
     const fileCount = children.length - folderCount;
     elements.meta.textContent = folderCount + " 个文件夹 · " + fileCount + " 个文件";
