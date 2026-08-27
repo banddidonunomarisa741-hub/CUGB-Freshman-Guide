@@ -312,7 +312,7 @@
       .map((child) => ({ name: child.name, path: currentPath.concat(child.name) }));
 
     if (!children.length) {
-      const isImageFolder = node.name === "正文的图片集合。";
+      const isImageFolder = node.name === "冰封相册";
       elements.list.innerHTML = isImageFolder
         ? emptyState("图片集合暂时为空", "加入图片并重新同步后，将按原文件名显示并可点击打开。", "◇")
         : emptyState("这个文件夹是空的", "原目录中未放置可访问的文件。", "∅");
@@ -429,7 +429,7 @@
     let totalImages = 0;
     cards.forEach((card) => {
       const albumName = card.dataset.album;
-      const albumPath = ["正文的图片集合。", albumName];
+      const albumPath = ["冰封相册", albumName];
       const folder = findFolder(albumPath);
       const images = [];
       if (folder) collectAlbumImages(folder, albumPath, images);
