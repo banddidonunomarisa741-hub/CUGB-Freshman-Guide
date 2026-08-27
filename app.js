@@ -232,13 +232,24 @@
     }
 
     const extension = node.kind === "folder" ? "folder" : getExtension(node.name);
+    const imageFile = node.kind === "file" && isImageName(node.name);
     const identity = document.createElement("span");
     identity.className = "file-identity";
 
     const icon = document.createElement("span");
-    icon.className = "file-icon " + extension;
     icon.setAttribute("aria-hidden", "true");
-    icon.textContent = iconLabel(node);
+    if (imageFile) {
+      icon.className = "file-preview";
+      const preview = document.createElement("img");
+      preview.src = fileUrl(path);
+      preview.alt = "";
+      preview.loading = "lazy";
+      preview.decoding = "async";
+      icon.appendChild(preview);
+    } else {
+      icon.className = "file-icon " + extension;
+      icon.textContent = iconLabel(node);
+    }
 
     const nameWrap = document.createElement("span");
     nameWrap.className = "file-name-wrap";
@@ -397,6 +408,49 @@
     elements.viewerNext.addEventListener("click", () => stepImageViewer(1));
     elements.viewerClose.addEventListener("click", closeImageViewer);
     elements.viewer.querySelectorAll("[data-viewer-close]").forEach((node) => node.addEventListener("click", closeImageViewer));
+  }
+
+  function setupFrozenGallery() {
+    const cards = Array.from(document.querySelectorAll(".frozen-album[data-album]"));
+    const summary = document.getElementById("gallery-summary");
+    const status = document.getElementById("gallery-freeze-status");
+    if (!cards.length) return;
+
+    function collectAlbumImages(folder, parentPath, results) {
+      (folder.children || []).forEach((child) => {
+        const childPath = parentPath.concat(child.name);
+        if (child.kind === "folder") collectAlbumImages(child, childPath, results);
+        else if (isImageName(child.name)) results.push({ name: child.name, path: childPath });
+      });
+    }
+
+    let totalImages = 0;
+    cards.forEach((card) => {
+      const albumName = card.dataset.album;
+      const albumPath = ["正文的图片集合。", albumName];
+      const folder = findFolder(albumPath);
+      const images = [];
+      if (folder) collectAlbumImages(folder, albumPath, images);
+      totalImages += images.length;
+
+      const countLabel = card.querySelector(".album-copy span");
+      if (countLabel) countLabel.textContent = images.length ? `${images.length} 张 · 点击浏览` : "0 张 · 待归档";
+
+      const frame = card.querySelector(".frozen-frame");
+      if (frame && images.length) {
+        const cover = images[Math.floor((images.length - 1) * .38)];
+        const preview = document.createElement("img");
+        preview.src = fileUrl(cover.path);
+        preview.alt = "";
+        preview.loading = "lazy";
+        preview.decoding = "async";
+        frame.insertBefore(preview, frame.firstChild);
+        frame.classList.add("has-preview");
+      }
+    });
+
+    if (summary) summary.textContent = `共 ${totalImages} 张影像，已完成轻量化处理并按四类归档。`;
+    if (status) status.lastChild.textContent = `4 个分类 · ${totalImages} 张照片`;
   }
 
   function openSidebar() {
@@ -705,6 +759,7 @@
   setupSonarScroll();
   setupMusicPlayer();
   setupImageViewer();
+  setupFrozenGallery();
   setupVisitorCounter();
   setupIntroSequence();
 })();
