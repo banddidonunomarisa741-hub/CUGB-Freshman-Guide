@@ -1,0 +1,52 @@
+name: Deploy static archive to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the lightweight site files
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            index.html
+            404.html
+            app.js
+            styles.css
+            manifest.js
+            deploy-config.js
+            .nojekyll
+          sparse-checkout-cone-mode: false
+
+      - name: Prepare Pages artifact
+        shell: bash
+        run: |
+          mkdir -p _site
+          cp index.html 404.html app.js styles.css manifest.js .nojekyll _site/
+          printf 'window.CUGB_FILE_BASE = "https://raw.githubusercontent.com/%s/%s/files/";\n' "$GITHUB_REPOSITORY" "$GITHUB_SHA" > _site/deploy-config.js
+          printf 'window.CUGB_AUDIO_URL = "https://raw.githubusercontent.com/%s/%s/media/Zwei%%20-%%20LAST%%20GAME.mp3";\n' "$GITHUB_REPOSITORY" "$GITHUB_SHA" >> _site/deploy-config.js
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

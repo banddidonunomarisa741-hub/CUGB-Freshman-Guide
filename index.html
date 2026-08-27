@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0052cc">
+  <meta name="description" content="按原目录结构浏览 CUGB 大一一年资料文件。">
+  <title>CUGB大一一年指南：一个大二学生的信息差、试错与思想札记</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro-active">
+  <div class="intro-sequence" id="intro-sequence" aria-hidden="true">
+    <div class="intro-glow"></div>
+    <div class="intro-content">
+      <span class="intro-kicker">PERSONAL DIGITAL ARCHIVE · 2026</span>
+      <svg class="intro-ridges" viewBox="0 0 520 150" role="presentation">
+        <path class="intro-ridge intro-ridge-back" d="M2 129 65 86 102 108 161 49 205 98 264 30 314 88 364 51 419 103 460 71 518 128"/>
+        <path class="intro-ridge intro-ridge-front" d="M1 145 83 113 120 132 189 79 234 118 298 63 354 120 400 91 462 132 519 105"/>
+        <path class="intro-snow" d="m145 65 16-16 16 21 12 11 16 17m43-49 16-19 18 23 14 16 18 19m36-22 14-15 17 20 13 9"/>
+      </svg>
+      <div class="intro-title">CUGB大一一年指南</div>
+      <div class="intro-subtitle">一个大二学生的信息差、试错与思想札记</div>
+      <span class="intro-progress"><i></i></span>
+      <small>点击任意位置跳过</small>
+    </div>
+  </div>
+  <a class="skip-link" href="#file-panel">跳到文件列表</a>
+
+  <div class="side-rail side-rail-left" aria-hidden="true">
+    <div class="left-polar-scene">
+      <svg class="side-iceberg side-iceberg-ghost" viewBox="0 0 190 130" role="presentation">
+        <path class="side-berg-shadow" d="M2 116 32 88 51 99 84 42 111 83 137 61 188 116Z"/>
+        <path class="side-berg-face" d="M35 118 85 42 151 118Z"/>
+        <path class="side-berg-light" d="M85 42 66 72 82 67 91 81 98 64 111 83Z"/>
+      </svg>
+      <svg class="side-iceberg side-iceberg-main" viewBox="0 0 210 150" role="presentation">
+        <path class="side-berg-shadow" d="M0 136 35 105 62 119 96 65 126 111 158 83 210 136Z"/>
+        <path class="side-berg-face" d="M35 139 105 32 184 139Z"/>
+        <path class="side-berg-cut" d="M105 32 184 139 135 103 121 69Z"/>
+        <path class="side-berg-light" d="m105 32-24 37 20-8 10 19 12-22 18 30"/>
+      </svg>
+      <span class="ice-floe floe-one"><i></i></span>
+      <span class="ice-floe floe-two"><i></i></span>
+      <span class="ice-floe floe-three"><i></i></span>
+      <span class="ice-floe floe-four"><i></i></span>
+      <span class="polar-waterline"></span>
+    </div>
+    <span class="rail-code">CORE · 1952</span>
+    <i class="depth-axis"></i>
+    <span class="depth-tick tick-a">0</span>
+    <span class="depth-tick tick-b">25</span>
+    <span class="depth-tick tick-c">50</span>
+    <span class="depth-tick tick-d">75</span>
+    <div class="side-core">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <span class="side-ice-crystal crystal-left"></span>
+  </div>
+
+  <div class="side-rail side-rail-right sonar-rail" id="sonar-rail" aria-hidden="true">
+    <div class="right-ice-field">
+      <span class="sonar-ice-chunk sonar-ice-one"><i></i></span>
+      <span class="sonar-ice-chunk sonar-ice-two"><i></i></span>
+      <span class="sonar-ice-chunk sonar-ice-three"><i></i></span>
+      <span class="right-ice-current"></span>
+    </div>
+    <div class="sonar-scope-scroll">
+      <div class="sonar-scope">
+        <span class="sonar-ring ring-one"></span>
+        <span class="sonar-ring ring-two"></span>
+        <span class="sonar-ring ring-three"></span>
+        <span class="sonar-cross cross-horizontal"></span>
+        <span class="sonar-cross cross-vertical"></span>
+        <i class="sonar-sweep"></i>
+        <b class="sonar-blip blip-one"></b>
+        <b class="sonar-blip blip-two"></b>
+        <b class="sonar-blip blip-three"></b>
+      </div>
+    </div>
+    <svg class="sonar-waveform" viewBox="0 0 48 230" preserveAspectRatio="none" role="presentation">
+      <path class="sonar-axis" d="M24 0V230"/>
+      <path class="sonar-signal" d="M24 0v31l-2 8 4 7-7 9 12 10-17 12 21 12-14 10 7 9-4 9v93"/>
+    </svg>
+    <div class="ocean-waves">
+      <i class="ocean-wave wave-front"></i>
+      <i class="ocean-wave wave-middle"></i>
+      <i class="ocean-wave wave-back"></i>
+      <span class="bubble bubble-one"></span>
+      <span class="bubble bubble-two"></span>
+      <span class="bubble bubble-three"></span>
+    </div>
+    <span class="sonar-label">SONAR</span>
+  </div>
+
+  <div class="ice-particle-layer" id="ice-particle-layer" aria-hidden="true"></div>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#/" aria-label="返回资料柜首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <path d="M6 35 18.5 13 26 26.2 31.5 17 42 35H6Z" fill="currentColor" opacity=".96"/>
+            <path d="M10 35h32M14 29h24M18 23h17" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+          </svg>
+        </span>
+        <span>
+          <b>CUGB · ONLINE ARCHIVE</b>
+          <small>大一一年资料柜</small>
+        </span>
+      </a>
+
+      <div class="music-invite" id="music-invite">
+        <span class="music-staff" aria-hidden="true">
+          <svg viewBox="0 0 74 34" role="presentation">
+            <path class="staff-flow flow-one" d="M1 7C15 1 24 13 38 7S60 1 73 8"/>
+            <path class="staff-flow flow-two" d="M1 12C14 6 26 18 40 12S60 6 73 13"/>
+            <path class="staff-flow flow-three" d="M1 17C16 11 27 23 41 17S60 11 73 18"/>
+            <path class="staff-flow flow-four" d="M1 22C14 16 26 28 40 22S60 16 73 23"/>
+            <path class="staff-flow flow-five" d="M1 27C15 21 27 33 41 27S60 21 73 28"/>
+            <path class="staff-note note-stem-a" d="M22 8v15"/><circle class="staff-note" cx="18" cy="24" r="3.5"/>
+            <path class="staff-note note-stem-b" d="M55 10v13"/><circle class="staff-note" cx="51" cy="24" r="3.5"/>
+          </svg>
+        </span>
+        <span class="music-copy">
+          <b>是否播放背景音乐？</b>
+          <small id="music-subtitle">enjoy my taste？</small>
+        </span>
+        <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="确认并播放音乐">
+          <span>确认</span><i aria-hidden="true"></i>
+        </button>
+        <span class="music-message" id="music-message" role="status" aria-live="polite"></span>
+        <audio id="site-audio" preload="metadata" data-src="media/Zwei%20-%20LAST%20GAME.mp3"></audio>
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-button mobile-menu-button" id="menu-button" type="button" aria-label="打开目录" aria-controls="sidebar" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.8"></circle><path d="m16 16 4 4"></path></svg>
+          <label class="visually-hidden" for="search-input">搜索文件夹或文件名</label>
+          <input id="search-input" type="search" autocomplete="off" placeholder="搜索名称…">
+          <kbd>/</kbd>
+        </div>
+      </div>
+    </header>
+
+    <section class="archive-hero" aria-labelledby="hero-title">
+      <div class="contour-map" aria-hidden="true">
+        <span class="contour contour-a"></span>
+        <span class="contour contour-b"></span>
+        <span class="contour contour-c"></span>
+      </div>
+      <svg class="satellite-flight-path" viewBox="0 0 320 80" role="presentation" aria-hidden="true">
+        <path d="M8 55C82 22 177 18 310 38"/>
+      </svg>
+      <div class="blue-satellite" aria-hidden="true">
+        <i class="satellite-panel panel-left"></i>
+        <i class="satellite-body"><b></b></i>
+        <i class="satellite-panel panel-right"></i>
+        <i class="satellite-dish"></i>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow"><i></i>CUGB · 1952 · GEOLOGICAL BLUE</div>
+        <h1 id="hero-title">
+          <span>CUGB大一一年指南：</span>
+          <em>一个大二学生的信息差、<br>试错与思想札记</em>
+        </h1>
+        <p>按原目录浏览并打开文件。</p>
+      </div>
+      <div class="exploration-scene" aria-hidden="true">
+        <svg class="hero-mountain-range" viewBox="0 0 640 230" role="presentation">
+          <defs>
+            <linearGradient id="ridgeIce" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+              <stop offset="1" stop-color="#dceeff" stop-opacity=".025"/>
+            </linearGradient>
+          </defs>
+          <path class="ridge-fill ridge-fill-back" d="M0 190 74 130 111 155 176 78 233 139 309 51 363 118 424 72 487 145 548 94 640 182 640 230 0 230Z"/>
+          <path class="ridge-line ridge-line-back" d="M0 190 74 130 111 155 176 78 233 139 309 51 363 118 424 72 487 145 548 94 640 182"/>
+          <path class="ridge-fill ridge-fill-front" d="M-8 222 89 172 134 193 207 121 260 168 338 92 405 161 453 127 526 188 579 151 652 218 652 230-8 230Z"/>
+          <path class="ridge-line ridge-line-front" d="M-8 222 89 172 134 193 207 121 260 168 338 92 405 161 453 127 526 188 579 151 652 218"/>
+          <path class="ridge-snow" d="m160 95 16-17 18 22 13 21 15 6 11 12m57-69 19-19 17 25 13 17 24 25m45-29 16-17 19 23 14 10 17 20m79-38 16-14 17 20 16 11"/>
+          <path class="ridge-shard" d="m203 121 12 23 12-10 12 22m99-64 15 25 13-12 17 25m70-3 15 20 12-9 13 17"/>
+        </svg>
+        <svg class="everest" viewBox="0 0 460 254" role="presentation">
+          <path class="peak-back" d="M0 245 98 145 155 207 252 77 330 167 377 126 460 245Z"/>
+          <path class="peak-main" d="M54 254 248 36 418 254Z"/>
+          <path class="peak-shadow" d="M248 36 418 254 299 181 273 122 240 92Z"/>
+          <path class="snow-cap" d="M248 36 201 89 224 84 232 110 248 91 267 120 277 91 303 105Z"/>
+          <path class="snow-ridge" d="M201 89 140 159 190 130 210 143 232 110 248 91"/>
+          <path class="ice-line" d="M116 205 170 171 196 185 240 150M280 142l39 34 26-12 31 44"/>
+        </svg>
+        <div class="scene-north">N<br>↑</div>
+      </div>
+    </section>
+
+    <main class="archive-layout">
+      <aside class="sidebar" id="sidebar" aria-label="文件夹目录">
+        <div class="sidebar-heading">
+          <span>目录导航</span>
+          <button id="close-menu-button" class="close-menu-button" type="button" aria-label="关闭目录">×</button>
+        </div>
+        <nav id="folder-tree" class="folder-tree"></nav>
+        <div class="sidebar-note">
+          <span class="status-light"></span>
+          <div><b>原目录结构</b><small>文件夹层级保持一致</small></div>
+        </div>
+      </aside>
+
+      <section class="file-panel" id="file-panel" tabindex="-1">
+        <div class="panel-toolbar">
+          <nav class="breadcrumbs" id="breadcrumbs" aria-label="当前位置"></nav>
+          <div class="panel-meta" id="panel-meta" aria-live="polite"></div>
+        </div>
+
+        <div class="search-heading" id="search-heading" hidden>
+          <div>
+            <span>名称搜索</span>
+            <h2>搜索结果</h2>
+          </div>
+          <button id="clear-search" class="text-button" type="button">清除搜索</button>
+        </div>
+
+        <div class="column-labels" aria-hidden="true">
+          <span>名称</span>
+          <span>类型</span>
+        </div>
+        <div class="file-list" id="file-list"></div>
+
+        <div class="hierarchy-motion" aria-hidden="true">
+          <div class="motion-heading">
+            <span>目录路径</span>
+            <small>由总目录逐级找到文档</small>
+          </div>
+          <div class="motion-track">
+            <i class="motion-line"></i>
+            <i class="motion-pulse"></i>
+            <span class="motion-step"><b>01</b><em>总文件夹</em></span>
+            <span class="motion-step"><b>02</b><em>分文件夹</em></span>
+            <span class="motion-step"><b>03</b><em>文档</em></span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="geology-deck" aria-hidden="true">
+      <div class="seismic-unit">
+        <span class="deck-code">SEISMIC / 01</span>
+        <svg viewBox="0 0 620 110" preserveAspectRatio="none" role="presentation">
+          <path class="seismic-grid" d="M0 22H620M0 55H620M0 88H620M80 0V110M180 0V110M280 0V110M380 0V110M480 0V110M580 0V110"/>
+          <path class="seismic-wave" d="M0 58h105l18-5 10 10 15-26 12 46 18-68 18 80 15-57 17 38 15-22 19 8 23-4h335"/>
+        </svg>
+        <i class="seismic-scan"></i>
+      </div>
+      <div class="tectonic-unit">
+        <span class="deck-code">PLATE / 02</span>
+        <i class="plate plate-left"></i>
+        <i class="plate plate-right"></i>
+        <i class="magma-core"></i>
+        <i class="magma-pulse pulse-one"></i>
+        <i class="magma-pulse pulse-two"></i>
+      </div>
+      <div class="crystal-unit">
+        <span class="deck-code">MINERAL / 03</span>
+        <div class="crystal-cluster">
+          <i class="crystal crystal-one"></i>
+          <i class="crystal crystal-two"></i>
+          <i class="crystal crystal-three"></i>
+        </div>
+        <span class="crystal-orbit"></span>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>CUGB ARCHIVE · 2026</span>
+      <p>原目录文件访问 · 非校方网站</p>
+      <span class="footer-strata" aria-hidden="true"></span>
+    </footer>
+  </div>
+
+  <div class="image-viewer" id="image-viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-name" hidden>
+    <div class="viewer-backdrop" data-viewer-close></div>
+    <div class="viewer-shell">
+      <header class="viewer-header">
+        <div>
+          <span class="viewer-index" id="viewer-index">1 / 1</span>
+          <b id="viewer-name">图片预览</b>
+        </div>
+        <button class="viewer-close" id="viewer-close" type="button" aria-label="关闭图片预览">×</button>
+      </header>
+      <div class="viewer-stage">
+        <button class="viewer-nav viewer-prev" id="viewer-prev" type="button" aria-label="上一张"><i>←</i><span>上一张</span></button>
+        <img id="viewer-image" alt="">
+        <button class="viewer-nav viewer-next" id="viewer-next" type="button" aria-label="下一张"><span>下一张</span><i>→</i></button>
+      </div>
+      <footer class="viewer-footer">
+        <span>键盘 ← → 翻页 · Esc 关闭</span>
+        <a id="viewer-original" href="#" target="_blank" rel="noopener">打开原图 ↗</a>
+      </footer>
+    </div>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+  <noscript>需要启用 JavaScript 才能浏览目录。</noscript>
+  <script src="deploy-config.js"></script>
+  <script src="manifest.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
