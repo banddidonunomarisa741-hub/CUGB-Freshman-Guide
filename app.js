@@ -46,7 +46,9 @@
   }
 
   function fileUrl(parts) {
-    const base = window.CUGB_FILE_BASE || "files/";
+    const fileBase = window.CUGB_FILE_BASE || "files/";
+    const imageBase = typeof window.CUGB_IMAGE_BASE === "string" ? window.CUGB_IMAGE_BASE : fileBase;
+    const base = isImageName(parts[parts.length - 1] || "") ? imageBase : fileBase;
     return base + encodePath(parts);
   }
 
